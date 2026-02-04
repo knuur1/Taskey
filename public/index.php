@@ -6,8 +6,14 @@ require __DIR__ . '/../vendor/autoload.php';
 use Framework\Kernel;
 use Framework\Request;
 
-// Initialize the Kernel
+// Initialize/creates the Kernel
 $kernel = new Kernel();
+
+$router = $kernel->getRouter();
+
+$router->addRoute("GET", "/", "Welcome to Taskey!");
+$router->addRoute("GET", "/about", "About Taskey");
+
 
 // Extract the path from the URL
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

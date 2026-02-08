@@ -17,8 +17,8 @@ class Router
 
         foreach ($this->routes as $route) {
             if ($route->matches($request->method, $request->path)) {
-                $response = new Response();
-                $response->body = $route->returnValue;
+                $callback = $route->callback;
+                $response = $callback();
                 break;
             }
         }
@@ -30,9 +30,9 @@ class Router
         return new Response('Not Found', 404);
     }
 
-    public function addRoute(string $method, string $path, string $returnValue): void
+    public function addRoute(string $method, string $path, callable $callback): void
     {
-        $route = new Route($method, $path, $returnValue);
+        $route = new Route($method, $path, $callback);
 
         // array_push($this->routes, $route);
         $this->routes[] = $route;

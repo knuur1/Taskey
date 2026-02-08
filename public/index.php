@@ -5,15 +5,16 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Framework\Kernel;
 use Framework\Request;
+use App\Controllers\HomeController;
+use App\Controllers\TaskController;
+use App\RouteProvider;
 
 // Initialize/creates the Kernel
 $kernel = new Kernel();
 
-$router = $kernel->getRouter();
+$routeProvider = new RouteProvider();
 
-$router->addRoute("GET", "/", "Welcome to Taskey!");
-$router->addRoute("GET", "/about", "About Taskey");
-
+$kernel->registerRoutes($routeProvider);
 
 // Extract the path from the URL
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

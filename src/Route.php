@@ -2,19 +2,22 @@
 
 namespace Framework;
 
+use phpDocumentor\Reflection\Types\Callable_;
+
 class Route
 {
     public string $method;
 
     public string $path;
 
-    public string $returnValue;
+    /** @var callable */
+    public $callback;
 
-    public function __construct(string $method, string $path, string $returnValue)
+    public function __construct(string $method, string $path, callable $callback)
     {
         $this->method = $method;
         $this->path = $path;
-        $this->returnValue = $returnValue;
+        $this->callback = $callback;
     }
 
     public function matches(string $method, string $path): bool

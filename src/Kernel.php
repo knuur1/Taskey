@@ -11,9 +11,13 @@ class Kernel
         $this->router = new Router();
     }
 
-    public function getRouter(): Router
+    // public function getRouter(): Router
+    // {
+    //    return $this->router;
+
+    public function registerRoutes(RouteProviderInterface $provider): void
     {
-        return $this->router;
+        $provider->register($this->router);
     }
 
     public function handle(Request $request): Response
